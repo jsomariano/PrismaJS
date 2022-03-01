@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 
 export default function findUsersWithRelations(prisma: PrismaClient) {
-  return prisma.user.findMany({
+  return prisma.users.findMany({
     include: {
       posts: {
         include: {
@@ -14,5 +14,13 @@ export default function findUsersWithRelations(prisma: PrismaClient) {
         },
       },
     },
+    /* orderBy: {
+      id: 'asc',
+    },
+    where: {
+      id: {
+        not: 1,
+      },
+    }, */
   });
 }

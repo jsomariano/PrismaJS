@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 
 export default function updateUser(prisma: PrismaClient) {
-  return prisma.user.update({
+  return prisma.users.update({
     where: {
       id: 1,
     },

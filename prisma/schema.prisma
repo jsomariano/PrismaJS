@@ -10,30 +10,31 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model Users {
   id      Int      @id @default(autoincrement())
   name    String
   email   String
-  posts   Post[]
-  profile Profile?
+  posts   Posts[]
+  profile Profiles?
 }
 
-model Profile {
+model Profiles {
   id     Int  @id @default(autoincrement())
   bio    String
-  user   User @relation(fields: [userId], references: [id])
+  user   Users @relation(fields: [userId], references: [id])
   userId Int // relation scalar field (used in the `@relation` attribute above)
 }
 
-model Post {
+model Posts {
   id         Int        @id @default(autoincrement())
-  title      String     @unique
-  author     User       @relation(fields: [authorId], references: [id])
+  title      String    
+  author     Users       @relation(fields: [authorId], references: [id])
   authorId   Int // relation scalar field  (used in the `@relation` attribute above)
-  categories Category[]
+  categories categories[]
 }
 
-model Category {
+model categories {
   id    Int    @id @default(autoincrement())
-  posts Post[]
+  title String
+  posts Posts[]
 }
