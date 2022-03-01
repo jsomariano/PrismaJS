@@ -1,0 +1,2 @@
+# PrismaJS
+Learning Prisma JS
