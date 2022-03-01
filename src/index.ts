@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import util from 'util';
 import createUser from './createUser';
 import findUsersWithRelations from './findUsersWithRelations';
 
@@ -8,9 +9,7 @@ async function main() {
   await createUser(prisma);
   const allUsers = await findUsersWithRelations(prisma);
 
-  console.log({
-    allUsers,
-  });
+  console.log(util.inspect(allUsers, false, null, true));
 }
 
 main()
