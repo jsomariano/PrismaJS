@@ -1,8 +1,8 @@
-import { PrismaClient, Users } from '@prisma/client';
+import { PrismaClient, User } from '@prisma/client';
 
 export async function usingRaw(prisma: PrismaClient) {
   // Tagged template
-  const users = await prisma.$queryRaw<Users[]>`
+  const users = await prisma.$queryRaw<User[]>`
     SELECT * FROM Users
   `;
 

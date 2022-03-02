@@ -1,26 +1,30 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, User } from '@prisma/client';
 
-export default async function createUser(prisma: PrismaClient) {
-  const user = await prisma.users.create({
+export default async function createUser(prisma: PrismaClient, values: User) {
+  const {
+    name, email,
+  } = values;
+
+  const user = await prisma.user.create({
     data: {
-      email: 'johnDoe@email.com',
-      name: 'John Doe',
+      email,
+      name,
     },
   });
 
-  const postAndCategoriesPromise = prisma.posts.create({
+  const postAndCategoriesPromise = prisma.post.create({
     data: {
       title: 'Post',
       authorId: user.id,
       categories: {
         create: {
-          title: 'My category',
+          id: user.id,
         },
       },
     },
   });
 
-  const profilesPromise = prisma.profiles.create({
+  const profilesPromise = prisma.profile.create({
     data: {
       bio: 'My bio',
       userId: user.id,
@@ -32,6 +36,19 @@ export default async function createUser(prisma: PrismaClient) {
     profilesPromise,
   ]);
 
+  return prisma.user.findFirst({
+    where: {
+      id: user.id,
+    },
+    include: {
+      posts: {
+        include: {
+          categories: true,
+        },
+      },
+      profile: true,
+    },
+  });
 /*   return prisma.users.create({
     data: {
       name: 'John doe',

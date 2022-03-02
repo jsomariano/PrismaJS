@@ -1,8 +1,9 @@
 import { PrismaClient } from '@prisma/client';
 
 export default function findUsersWithRelations(prisma: PrismaClient) {
-  return prisma.users.findMany({
+  return prisma.user.findMany({
     include: {
+      profile: true,
       posts: {
         include: {
           author: {
