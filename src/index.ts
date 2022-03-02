@@ -9,6 +9,7 @@ const expressPort = 3000;
 
 const prisma = new PrismaClient();
 const app = express();
+
 app.use(bodyParser.json());
 
 async function main() {
@@ -41,12 +42,30 @@ async function main() {
   app.delete('/users/:id', async (req, res) => {
     const { id } = req.params;
 
-    const user = await prisma.user.delete({
+    const userId = Number(id);
+
+    const deleteProfiles = prisma.profile.delete({
       where: {
-        id: Number(id),
+        userId,
       },
     });
-    res.json(user);
+
+    const deletePosts = prisma.post.deleteMany({
+      where: {
+        authorId: userId,
+      },
+    });
+
+    const deleteUser = prisma.user.delete({
+      where: {
+        id: userId,
+      },
+    });
+
+    // A ordem da transaction importa, se colocar o delete profiles depois causa problema de FK
+    await prisma.$transaction([deletePosts, deleteProfiles, deleteUser]);
+
+    res.sendStatus(204);
   });
 
   app.listen(expressPort);

@@ -6,13 +6,6 @@ You can now invoke the Prisma CLI by prefixing it with npx:
 ```shell
 npx prisma
 ```
-
-Next, set up your Prisma project by creating your Prisma schema file with the following command:
-
-```shell
-npx prisma init
-```
-
 ---
 
 # Migrations
@@ -20,18 +13,17 @@ npx prisma init
 To map your data model to the database schema, you need to use the prisma migrate CLI commands:
 
 ```shell
-npx prisma migrate dev --name init
+npx prisma migrate dev
 ```
 
 ---
 
-# Prisma Client
+# Update prisma client
 
-Install and generate Prisma Client
-To get started with Prisma Client, you need to install the @prisma/client package:
+run 
 
 ```shell
-npm install @prisma/client
+npx prisma generate
 ```
 
 # Prisma Studio
@@ -44,3 +36,12 @@ Use CLI command
 npx prisma studio 
 ```
 
+---
+
+# Introspect
+
+The typical workflow for projects that are not using Prisma Migrate, but instead use plain SQL or another migration tool looks as follows:
+
+- Change the database schema (e.g. using plain SQL)
+- Run `prisma db pull` to update the Prisma schema
+- Run `prisma generate` to update Prisma Client
