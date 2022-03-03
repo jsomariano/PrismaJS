@@ -2,8 +2,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { PrismaClient, User } from '@prisma/client';
 import createUser from './createUser';
-import findUsersWithRelations from './findUsersWithRelations';
 import updateUser from './updateUser';
+import findUsersWithRelations from './findUsersWithRelations';
 
 const expressPort = 3000;
 
@@ -18,6 +18,7 @@ async function main() {
 
     res.json(allUsers);
   });
+
   app.post('/users', async (req, res) => {
     const {
       name, email,
@@ -29,6 +30,7 @@ async function main() {
 
     res.json(user);
   });
+
   app.put('/users/:id', async (req, res) => {
     const { id } = req.params;
     const { name, email } = req.body;
@@ -39,6 +41,7 @@ async function main() {
 
     res.json(userUpdated);
   });
+
   app.delete('/users/:id', async (req, res) => {
     const { id } = req.params;
 

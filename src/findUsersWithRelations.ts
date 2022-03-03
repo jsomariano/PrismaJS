@@ -15,6 +15,11 @@ export default function findUsersWithRelations(prisma: PrismaClient) {
         },
       },
     },
+    // skip: 3,
+    // take: 2,
+    // cursor: {
+    //   id: 5,
+    // },
     /* orderBy: {
       id: 'asc',
     },
