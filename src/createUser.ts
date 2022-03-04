@@ -49,25 +49,25 @@ export default async function createUser(prisma: PrismaClient, values: User) {
       profile: true,
     },
   });
-/*   return prisma.users.create({
-    data: {
-      name: 'John doe',
-      email: 'johnDoe@email.com',
-      posts: {
-        create: {
-          title: 'my post',
-          categories: {
-            create: {
-              title: 'my category',
-            },
-          },
-        },
-      },
-      profile: {
-        create: {
-          bio: 'My bio',
-        },
-      },
-    },
-  }); */
+  //   return prisma.users.create({
+  //   data: {
+  //     name: 'John doe',
+  //     email: 'johnDoe@email.com',
+  //     posts: {
+  //       create: {
+  //         title: 'my post',
+  //         categories: {
+  //           create: {
+  //             title: 'my category',
+  //           },
+  //         },
+  //       },
+  //     },
+  //     profile: {
+  //       create: {
+  //         bio: 'My bio',
+  //       },
+  //     },
+  //   },
+  // });
 }

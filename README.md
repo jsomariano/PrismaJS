@@ -13,7 +13,7 @@ npx prisma
 To map your data model to the database schema, you need to use the prisma migrate CLI commands:
 
 ```shell
-npx prisma migrate dev
+prisma migrate dev --name init
 ```
 
 ---
